@@ -1,5 +1,4 @@
 import 'package:dog_tracker/controllers/auth_controller.dart';
-import 'package:dog_tracker/screens/home_screen.dart';
 import 'package:dog_tracker/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +17,6 @@ class LoginForm extends GetWidget<AuthController> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            //Image.asset()
             SizedBox(height: 15.0),
             TextFormField(
               controller: _nameController,

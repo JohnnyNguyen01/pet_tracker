@@ -1,5 +1,6 @@
 import 'package:dog_tracker/bindings/auth_binding.dart';
 import 'package:dog_tracker/util/root.dart';
+import 'package:dog_tracker/util/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,10 +23,7 @@ class MyApp extends StatelessWidget {
           return GetMaterialApp(
             initialBinding: AuthBinding(),
             title: 'Flutter Demo',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-              visualDensity: VisualDensity.adaptivePlatformDensity,
-            ),
+            theme: Themes.primaryTheme,
             home: Root(),
           );
         });

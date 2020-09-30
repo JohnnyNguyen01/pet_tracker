@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 class LoginScreen extends GetWidget<LoginScreenController> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  LoginScreenController controller = Get.put(LoginScreenController());
 
   @override
   Widget build(BuildContext context) {
