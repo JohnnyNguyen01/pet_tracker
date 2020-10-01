@@ -47,5 +47,11 @@
 	<string>Required for tracking your pet</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Required for tracking your pet</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	</string>Required to take and upload photos of your cute pet</string>
+	<key>NSCameraUsageDescription</key>
+	</string>Required to take and upload photos of your cute pet</string>
+	<key>NSMicrophoneUsageDescription</key>
+	</string>Required to take and upload photos of your cute pet</string>
 </dict>
 </plist>

@@ -38,6 +38,8 @@ dependencies:
   google_maps_flutter: ^0.5.33
   location: ^3.0.2
   animated_floatactionbuttons: ^0.1.0
+  image_picker: ^0.6.7+11
+  lottie: ^0.6.0
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +58,7 @@ flutter:
 
   assets:
     - lib/assets/images/
+    - lib/assets/animations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

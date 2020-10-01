@@ -8,4 +8,6 @@ class Constants {
   static TextStyle poppinsWhiteText = GoogleFonts.poppins(color: Colors.white);
   static TextStyle h2 =
       GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 30);
+  static TextStyle dialogTitle =
+      GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 24);
 }

@@ -1,14 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Pet {
+class PetModel {
   int id;
   String name;
+  String type;
 
-  Pet({this.id, this.name});
+  PetModel({this.id, this.name, this.type});
 
-  Pet.fromDocumentSnapshot(DocumentSnapshot snapshot) {
+  PetModel.fromDocumentSnapshot(DocumentSnapshot snapshot) {
     this.id = snapshot.data()['id'];
     this.name = snapshot.data()['name'];
+    this.type = snapshot.data()['type'];
   }
 
   Map<String, dynamic> toJson() {

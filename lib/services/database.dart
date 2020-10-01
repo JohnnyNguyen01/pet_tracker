@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dog_tracker/models/pet_model.dart';
 import '../models/user_model.dart';
 
 class Database {
@@ -29,6 +30,17 @@ class Database {
       //todo: add error case for getUser
       print(error);
       rethrow;
+    }
+  }
+
+  Future<void> createNewPet(PetModel pet) async {
+    try {
+      await _firestore
+          .collection("pets")
+          .doc(pet.id.toString())
+          .set({'id': pet.id.toString(), 'name': pet.name, 'type': pet.type});
+    } catch (error) {
+      print(error);
     }
   }
 }

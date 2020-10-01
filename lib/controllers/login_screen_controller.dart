@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 class LoginScreenController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
-
   Rx<User> _firebaseUser = Rx<User>();
   User get user => _firebaseUser.value;
 
