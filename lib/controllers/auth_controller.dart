@@ -1,6 +1,6 @@
 import 'package:dog_tracker/controllers/user_controller.dart';
 import 'package:dog_tracker/models/user_model.dart';
-import 'package:dog_tracker/screens/home_screen.dart';
+import 'package:dog_tracker/screens/home/home_screen.dart';
 import 'package:dog_tracker/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,7 +11,6 @@ class AuthController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   Rx<User> _firebaseUser = Rx<User>();
-
   User get user => _firebaseUser.value;
 
   @override

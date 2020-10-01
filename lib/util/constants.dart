@@ -6,4 +6,6 @@ class Constants {
     color: Color(0xFFB6C6FF),
   );
   static TextStyle poppinsWhiteText = GoogleFonts.poppins(color: Colors.white);
+  static TextStyle h2 =
+      GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 30);
 }
