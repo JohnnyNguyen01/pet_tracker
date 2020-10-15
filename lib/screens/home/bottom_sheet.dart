@@ -12,6 +12,8 @@ class AddButtonBottomSheet extends GetWidget<BottomSheetController>
   final TextEditingController _petTypeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    // controller binding
+    Get.lazyPut(() => BottomSheetController());
     return DraggableScrollableSheet(
       initialChildSize: 0.85,
       maxChildSize: 1.0,
@@ -57,30 +59,30 @@ class AddButtonBottomSheet extends GetWidget<BottomSheetController>
                         ),
                       ],
                     ),
-                    Stack(
-                      alignment: Alignment.center,
-                      overflow: Overflow.visible,
-                      children: [
-                        Obx(
-                          () => CircleAvatar(
-                            radius: 60,
-                            backgroundImage:
-                                FileImage(Get.put(DialogBoxController()).image),
-                          ),
-                        ),
-                        Positioned(
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.add_a_photo,
-                              size: 40,
-                            ),
-                            onPressed: () {
-                              Get.dialog(DialogBox());
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Stack(
+                    //   alignment: Alignment.center,
+                    //   overflow: Overflow.visible,
+                    //   children: [
+                    //     Obx(
+                    //       () => CircleAvatar(
+                    //         radius: 60,
+                    //         backgroundImage:
+                    //             FileImage(Get.put(DialogBoxController()).image),
+                    //       ),
+                    //     ),
+                    //     Positioned(
+                    //       child: IconButton(
+                    //         icon: Icon(
+                    //           Icons.add_a_photo,
+                    //           size: 40,
+                    //         ),
+                    //         onPressed: () {
+                    //           Get.dialog(DialogBox());
+                    //         },
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     SizedBox(height: 15),
                     Container(
                       width: MediaQuery.of(context).size.width / 1.25,

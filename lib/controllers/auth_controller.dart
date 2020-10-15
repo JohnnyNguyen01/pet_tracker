@@ -13,13 +13,6 @@ class AuthController extends GetxController {
   Rx<User> _firebaseUser = Rx<User>();
   User get user => _firebaseUser.value;
 
-  @override
-  void onInit() async {
-    //checks to see if the user signs in or out, using the FirebaseAuth Singleton
-    _firebaseUser.bindStream(_auth.authStateChanges());
-    await Firebase.initializeApp();
-  }
-
   ///Create a new User for the app
   ///
   /// String [name] :  name of the the new suer

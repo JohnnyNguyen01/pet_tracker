@@ -37,9 +37,11 @@ dependencies:
   google_fonts: ^1.1.0
   google_maps_flutter: ^0.5.33
   location: ^3.0.2
-  animated_floatactionbuttons: ^0.1.0
   image_picker: ^0.6.7+11
   lottie: ^0.6.0
+  device_info: ^0.4.2+8
+  bubble_bottom_bar: ^1.2.0
+
 
 dev_dependencies:
   flutter_test:

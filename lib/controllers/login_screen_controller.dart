@@ -28,7 +28,7 @@ class LoginScreenController extends GetxController {
           email: email, password: password);
       Get.find<UserController>().user =
           await Database.db.getUser(_user.user.uid);
-      Get.off(HomeScreen());
+      Get.offNamed("/homescreen");
     } catch (FirebaseExceptionError) {
       Get.snackbar("Login Error", FirebaseExceptionError);
       rethrow;

@@ -10,6 +10,13 @@ class HomeScreenController extends GetxController {
   PermissionStatus _permissionGranted;
   Location location = new Location();
   LocationData _locationData;
+  RxInt bottomNavIndex = 0.obs;
+
+  void changeBottomNav(int index) {
+    bottomNavIndex.value = index;
+    bottomNavIndex.refresh();
+    print(bottomNavIndex.value);
+  }
 
   ///Check Permissions function adapted from the quick start guide of the
   ///location package.

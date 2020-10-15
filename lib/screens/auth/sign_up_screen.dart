@@ -34,7 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             LoginForm(),
             FlatButton(
-              onPressed: () => Get.to(LoginScreen()),
+              onPressed: () => Get.toNamed("/loginscreen"),
               child: Text(
                 "Login",
                 style: Constants.loginButton,

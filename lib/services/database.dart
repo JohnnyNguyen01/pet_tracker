@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dog_tracker/models/gps_device_model.dart';
 import 'package:dog_tracker/models/pet_model.dart';
 import '../models/user_model.dart';
 
@@ -39,6 +40,19 @@ class Database {
           .collection("pets")
           .doc(pet.id.toString())
           .set({'id': pet.id.toString(), 'name': pet.name, 'type': pet.type});
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  ///Add a new GPS Device to Firestore in order to check whether a device is a
+  ///GPS or not.
+  Future<void> addNewGPS(GPSDeviceModel device) async {
+    try {
+      await _firestore
+          .collection("GPSDevices")
+          .doc(device.deviceID.toString())
+          .set({'deviceID': device.deviceID, 'deviceName': device.deviceName});
     } catch (error) {
       print(error);
     }
