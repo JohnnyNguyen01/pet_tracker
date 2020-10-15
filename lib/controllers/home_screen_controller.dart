@@ -63,16 +63,4 @@ class HomeScreenController extends GetxController {
     final AuthController _controller = Get.find();
     _controller.signOut();
   }
-
-  ///shows the AddBottomSheet when the user presses it. Takes in a BuildContext
-  ///from the parent as an argument
-  void handleAddButton(BuildContext context) {
-    showModalBottomSheet(
-        isScrollControlled: true,
-        isDismissible: true,
-        context: (context),
-        builder: (context) {
-          return AddButtonBottomSheet();
-        });
-  }
 }
