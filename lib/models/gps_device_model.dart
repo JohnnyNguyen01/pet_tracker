@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
+
 class GPSDeviceModel {
   String deviceID;
   String deviceName;
 
-  GPSDeviceModel({deviceID, deviceName});
+  GPSDeviceModel({@required this.deviceID, @required this.deviceName});
 
   GPSDeviceModel.fromJson(Map<String, dynamic> json) {
     this.deviceID = json['deviceID'];

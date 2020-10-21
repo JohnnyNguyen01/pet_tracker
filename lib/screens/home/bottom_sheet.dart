@@ -59,30 +59,6 @@ class AddButtonBottomSheet extends GetWidget<BottomSheetController>
                         ),
                       ],
                     ),
-                    // Stack(
-                    //   alignment: Alignment.center,
-                    //   overflow: Overflow.visible,
-                    //   children: [
-                    //     Obx(
-                    //       () => CircleAvatar(
-                    //         radius: 60,
-                    //         backgroundImage:
-                    //             FileImage(Get.put(DialogBoxController()).image),
-                    //       ),
-                    //     ),
-                    //     Positioned(
-                    //       child: IconButton(
-                    //         icon: Icon(
-                    //           Icons.add_a_photo,
-                    //           size: 40,
-                    //         ),
-                    //         onPressed: () {
-                    //           Get.dialog(DialogBox());
-                    //         },
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                     SizedBox(height: 15),
                     Container(
                       width: MediaQuery.of(context).size.width / 1.25,
@@ -97,6 +73,13 @@ class AddButtonBottomSheet extends GetWidget<BottomSheetController>
                               _petNameController.text, _petTypeController.text);
                         },
                       ),
+                    ),
+                    SizedBox(height: 15),
+                    FlatButton(
+                      onPressed: () {
+                        controller.handleTestBtn();
+                      },
+                      child: Text("Test thisDeviceIsGPS"),
                     ),
                   ],
                 ),

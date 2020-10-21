@@ -1,6 +1,5 @@
+import 'dart:async';
 import 'package:dog_tracker/controllers/auth_controller.dart';
-import 'package:dog_tracker/screens/home/bottom_sheet.dart';
-import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
 import 'package:location/location.dart';
@@ -8,7 +7,7 @@ import 'package:location/location.dart';
 class HomeScreenController extends GetxController {
   bool _serviceEnabled;
   PermissionStatus _permissionGranted;
-  Location location = new Location();
+  Location location = Location();
   LocationData _locationData;
   RxInt bottomNavIndex = 0.obs;
 

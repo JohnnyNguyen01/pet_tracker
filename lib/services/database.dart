@@ -57,4 +57,37 @@ class Database {
       print(error);
     }
   }
+
+  ///Checks if the current user device is designated as a GPS from Firebase.
+  ///[deviceID] refers to this deviceID as a string
+  Future<bool> thisDeviceIsGPS(String deviceID) async {
+    bool result;
+    try {
+      await _firestore
+                  .collection("GPSDevices")
+                  .where("deviceID", isEqualTo: deviceID)
+                  .limit(1)
+                  .get() !=
+              null
+          ? result = true
+          : result = false;
+    } catch (e) {
+      result = false;
+      print(e);
+    }
+    return result;
+  }
+
+  Future<void> uploadCurrentGPSLocation(
+      String deviceID, double latitude, double longitude) async {
+    try {
+      _firestore
+          .collection("DeviceCoordinates")
+          .doc(deviceID)
+          .collection("LatLng")
+          .add({'latitude': latitude, 'longitude': longitude});
+    } catch (error) {
+      print(error);
+    }
+  }
 }
