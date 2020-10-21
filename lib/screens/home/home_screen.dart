@@ -27,15 +27,18 @@ class HomeScreen extends GetWidget<HomeScreenController> {
                       child: CircularProgressIndicator(),
                     );
                   }
-                  return GoogleMap(
-                    myLocationButtonEnabled: true,
-                    myLocationEnabled: true,
-                    zoomControlsEnabled: false,
-                    initialCameraPosition: CameraPosition(
-                      target: snapshot.data,
-                      zoom: 20,
+                  return Obx(
+                    () => GoogleMap(
+                      myLocationButtonEnabled: true,
+                      myLocationEnabled: true,
+                      zoomControlsEnabled: false,
+                      markers: controller.markers.value,
+                      initialCameraPosition: CameraPosition(
+                        target: snapshot.data,
+                        zoom: 20,
+                      ),
+                      onMapCreated: (GoogleMapController controller) {},
                     ),
-                    onMapCreated: (GoogleMapController controller) {},
                   );
                 }),
 

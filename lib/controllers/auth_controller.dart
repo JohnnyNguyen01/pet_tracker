@@ -3,7 +3,6 @@ import 'package:dog_tracker/models/user_model.dart';
 import 'package:dog_tracker/screens/home/home_screen.dart';
 import 'package:dog_tracker/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get/state_manager.dart';
 import 'package:get/get.dart';
 

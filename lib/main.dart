@@ -3,8 +3,6 @@ import 'package:dog_tracker/bindings/homescreen_binding.dart';
 import 'package:dog_tracker/bindings/loginscreen_controller.dart';
 import 'package:dog_tracker/screens/auth/login_screen.dart';
 import 'package:dog_tracker/screens/home/home_screen.dart';
-import 'package:dog_tracker/services/api/device.dart';
-import 'package:dog_tracker/services/database.dart';
 import 'package:dog_tracker/util/root.dart';
 import 'package:dog_tracker/util/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,11 +23,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: Themes.primaryTheme,
       home: Root(),
-      onInit: () async {
-        if (await DeviceHelpers.thisDeviceIsDBGps()) {
-          DeviceHelpers.uploadLocationEveryTenSeconds();
-        }
-      },
+      //todo: reenable this after testing completed
+      // onInit: () async {
+      //   if (await DeviceHelpers.thisDeviceIsDBGps()) {
+      //     DeviceHelpers.uploadLocationEveryTenSeconds();
+      //   }
+      // },
       getPages: [
         GetPage(
           name: "/homescreen",

@@ -1,6 +1,4 @@
 import 'package:dog_tracker/controllers/bottom_sheet_controller.dart';
-import 'package:dog_tracker/controllers/home_screen_dialog_controller.dart';
-import 'package:dog_tracker/screens/home/dialog_box.dart';
 import 'package:dog_tracker/util/constants.dart';
 import 'package:dog_tracker/util/validators.dart';
 import 'package:flutter/material.dart';

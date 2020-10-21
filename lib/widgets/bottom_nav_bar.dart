@@ -7,7 +7,6 @@ class CommonBottomNavBar extends StatelessWidget {
   final _pageController = Get.put(BottomNavBarController());
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Obx(
       () => BubbleBottomBar(
         opacity: .2,

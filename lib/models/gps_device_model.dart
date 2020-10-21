@@ -20,6 +20,6 @@ class GPSDeviceModel {
 
   @override
   String toString() {
-    return "The devcieID: ${deviceID} || The deviceName: ${deviceName}";
+    return "The devcieID: $deviceID || The deviceName: $deviceName";
   }
 }
