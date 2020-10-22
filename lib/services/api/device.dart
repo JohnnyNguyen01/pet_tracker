@@ -6,7 +6,7 @@ import 'package:location/location.dart';
 
 import '../database.dart';
 
-class DeviceHelpers {
+class Device {
   static DeviceInfoPlugin _deviceInfo = DeviceInfoPlugin();
 
   ///Returns the device info with all the parameters indicated within
@@ -33,7 +33,7 @@ class DeviceHelpers {
   static void uploadLocationEveryTenSeconds() async {
     Location location = Location();
     const tenSeconds = const Duration(seconds: 10);
-    GPSDeviceModel device = await DeviceHelpers.getThisDeviceInfo();
+    GPSDeviceModel device = await Device.getThisDeviceInfo();
     Timer.periodic(tenSeconds, (timer) {
       location.onLocationChanged.listen((LocationData currentLocation) {
         Database.db.uploadCurrentGPSLocation(device.deviceID,

@@ -44,7 +44,7 @@ class BottomSheetController extends GetxController {
   }
 
   void handleTestBtn() async {
-    GPSDeviceModel thisDevice = await DeviceHelpers.getThisDeviceInfo();
+    GPSDeviceModel thisDevice = await Device.getThisDeviceInfo();
     bool result = await Database.db.thisDeviceIsGPS(thisDevice.deviceID);
     print(result);
   }

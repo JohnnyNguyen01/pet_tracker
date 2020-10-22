@@ -15,8 +15,19 @@ class HomeScreenController extends GetxController {
   RxInt bottomNavIndex = 0.obs;
   Rx<Marker> _currentMarker = Marker(markerId: MarkerId("0")).obs;
   Rx<Set<Marker>> _markers = HashSet<Marker>().obs;
-
+  Timer _timer;
   Rx<Set<Marker>> get markers => _markers;
+
+  @override
+  void onInit() async {
+    super.onInit();
+    if (await Device.thisDeviceIsDBGps()) {
+      Timer.periodic(const Duration(seconds: 1), (timer) {
+        setCurrentMapMarker();
+        Device.uploadLocationEveryTenSeconds();
+      });
+    }
+  }
 
   void changeBottomNav(int index) {
     bottomNavIndex.value = index;
@@ -57,8 +68,9 @@ class HomeScreenController extends GetxController {
     return LatLng(_location.latitude, _location.longitude);
   }
 
+  ///Update the current map marker for this device.
   void setCurrentMapMarker() async {
-    GPSDeviceModel thisDevice = await DeviceHelpers.getThisDeviceInfo();
+    GPSDeviceModel thisDevice = await Device.getThisDeviceInfo();
     _currentMarker.value = Marker(
       markerId: MarkerId(thisDevice.deviceID),
       position: await getCurrentLatLng(),
@@ -74,5 +86,11 @@ class HomeScreenController extends GetxController {
   void logout() async {
     final AuthController _controller = Get.find();
     _controller.signOut();
+  }
+
+  @override
+  FutureOr onClose() {
+    // TODO: implement onClose
+    return super.onClose();
   }
 }
