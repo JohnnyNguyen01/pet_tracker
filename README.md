@@ -1,8 +1,12 @@
 
-![](readme_files/gifs/logo_animation.gif)
+<img src="readme_files/gifs/logo_animation.gif" align:center/>
+
 # Pet Tracker
 Powered by
-![github-small](https://raw.githubusercontent.com/flutter/website/master/src/_assets/image/flutter-lockup.png)
+
+<img src="https://raw.githubusercontent.com/flutter/website/master/src/_assets/image/flutter-lockup.png" 
+    width=100px
+    height=20px/>
 
 ![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)
 
