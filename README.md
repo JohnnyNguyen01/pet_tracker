@@ -2,7 +2,9 @@
 <div style="text-align:center">
     <img src="readme_files/gifs/logo_animation.gif"/>
 </div>
+
 # Pet Tracker
+
 Powered by
 
 <img src="https://raw.githubusercontent.com/flutter/website/master/src/_assets/image/flutter-lockup.png" 
