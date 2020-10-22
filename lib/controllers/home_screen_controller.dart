@@ -63,6 +63,7 @@ class HomeScreenController extends GetxController {
       markerId: MarkerId(thisDevice.deviceID),
       position: await getCurrentLatLng(),
     );
+    print(await getCurrentLatLng());
     _currentMarker.refresh();
     _markers.value.clear();
     _markers.value.add(_currentMarker.value);
