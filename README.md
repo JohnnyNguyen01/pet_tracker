@@ -5,8 +5,8 @@
 Powered by
 
 <img src="https://raw.githubusercontent.com/flutter/website/master/src/_assets/image/flutter-lockup.png" 
-    width=100px
-    height=20px/>
+    width=238.25px
+    height=68px/>
 
 ![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)
 
