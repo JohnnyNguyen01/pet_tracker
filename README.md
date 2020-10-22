@@ -1,6 +1,7 @@
 
-<img src="readme_files/gifs/logo_animation.gif" align:center/>
-
+<div style="text-align:center">
+    <img src="readme_files/gifs/logo_animation.gif"/>
+</div>
 # Pet Tracker
 Powered by
 
