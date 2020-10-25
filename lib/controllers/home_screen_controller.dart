@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:dog_tracker/controllers/auth_controller.dart';
 import 'package:dog_tracker/models/gps_device_model.dart';
 import 'package:dog_tracker/services/api/device.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
 import 'package:location/location.dart';
@@ -13,20 +14,29 @@ class HomeScreenController extends GetxController {
   Location location = Location();
   LocationData _locationData;
   RxInt bottomNavIndex = 0.obs;
+  BitmapDescriptor _customPin;
   Rx<Marker> _currentMarker = Marker(markerId: MarkerId("0")).obs;
   Rx<Set<Marker>> _markers = HashSet<Marker>().obs;
-  Timer _timer;
   Rx<Set<Marker>> get markers => _markers;
 
   @override
   void onInit() async {
     super.onInit();
+    setCustomMapPin();
+    //todo: Uncomment after testing getLatestGeoPoint
     if (await Device.thisDeviceIsDBGps()) {
       Timer.periodic(const Duration(seconds: 1), (timer) {
         setCurrentMapMarker();
         Device.uploadLocationEveryTenSeconds();
       });
     }
+  }
+
+  ///Sets up a custom pin for Google Maps
+  void setCustomMapPin() async {
+    _customPin = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 2.5),
+        "lib/assets/images/corgi_pin_250x155.png");
   }
 
   void changeBottomNav(int index) {
@@ -72,9 +82,9 @@ class HomeScreenController extends GetxController {
   void setCurrentMapMarker() async {
     GPSDeviceModel thisDevice = await Device.getThisDeviceInfo();
     _currentMarker.value = Marker(
-      markerId: MarkerId(thisDevice.deviceID),
-      position: await getCurrentLatLng(),
-    );
+        markerId: MarkerId(thisDevice.deviceID),
+        position: await getCurrentLatLng(),
+        icon: _customPin);
     print(await getCurrentLatLng());
     _currentMarker.refresh();
     _markers.value.clear();

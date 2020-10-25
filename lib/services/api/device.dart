@@ -40,7 +40,6 @@ class Device {
             currentLocation.latitude, currentLocation.longitude);
       });
     });
-    print("Location uploaded");
   }
 
   ///Obtain whether this device is designated as a GPS Device within Firebase.

@@ -8,8 +8,6 @@ import 'package:get/get.dart';
 class HomeScreen extends GetWidget<HomeScreenController> {
   @override
   Widget build(BuildContext context) {
-    //Controller binding
-    //Get.lazyPut(() => HomeScreenController());
     return Scaffold(
       floatingActionButton: NavBarFABButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
@@ -30,7 +28,7 @@ class HomeScreen extends GetWidget<HomeScreenController> {
                   return Obx(
                     () => GoogleMap(
                       myLocationButtonEnabled: true,
-                      myLocationEnabled: true,
+                      // myLocationEnabled: true,
                       zoomControlsEnabled: false,
                       markers: controller.markers.value,
                       initialCameraPosition: CameraPosition(

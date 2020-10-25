@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info/device_info.dart';
 import 'package:dog_tracker/models/gps_device_model.dart';
 import 'package:dog_tracker/models/pet_model.dart';
@@ -45,7 +46,9 @@ class BottomSheetController extends GetxController {
 
   void handleTestBtn() async {
     GPSDeviceModel thisDevice = await Device.getThisDeviceInfo();
-    bool result = await Database.db.thisDeviceIsGPS(thisDevice.deviceID);
+    GeoPoint result =
+        await Database.db.getLatestGeopointOfDevice(thisDevice.deviceID);
+    
     print(result);
   }
 }

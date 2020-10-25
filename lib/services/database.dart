@@ -8,6 +8,8 @@ class Database {
 
   static final Database db = Database();
 
+  ///Creates a new user Document in the firebase `users` collection
+  ///with id, email and name fields.
   Future<bool> createNewUser(UserModel user) async {
     try {
       await _firestore
@@ -22,6 +24,7 @@ class Database {
     }
   }
 
+  ///Retrieve the selected user from Firebase.
   Future<UserModel> getUser(String uid) async {
     try {
       DocumentSnapshot doc =
@@ -52,7 +55,10 @@ class Database {
       await _firestore
           .collection("GPSDevices")
           .doc(device.deviceID.toString())
-          .set({'deviceID': device.deviceID, 'deviceName': device.deviceName});
+          .set({
+        'deviceID': device.deviceID,
+        'deviceName': device.deviceName,
+      });
     } catch (error) {
       print(error);
     }
@@ -78,16 +84,40 @@ class Database {
     return result;
   }
 
+  ///Upload this device's coordinates into firestore under the specific
+  ///deviceID. Latitude and Longitude are stored as a `Geopoint` data
+  ///type in firestore
   Future<void> uploadCurrentGPSLocation(
       String deviceID, double latitude, double longitude) async {
     try {
-      _firestore
+      await _firestore
           .collection("DeviceCoordinates")
           .doc(deviceID)
           .collection("LatLng")
-          .add({'latitude': latitude, 'longitude': longitude});
+          .add({
+        "coordinates": GeoPoint(latitude, longitude),
+        'date-time': DateTime.now()
+      });
     } catch (error) {
       print(error);
+    }
+  }
+
+  ///Returns the latest `Geopoint` of the selected deviceID from firestore
+  Future<GeoPoint> getLatestGeopointOfDevice(String deviceID) async {
+    try {
+      QuerySnapshot snapshot = await _firestore
+          .collection("DeviceCoordinates")
+          .doc(deviceID)
+          .collection("LatLng")
+          .orderBy("date-time", descending: true)
+          .limit(1)
+          .get();
+      QueryDocumentSnapshot docSnapshot = snapshot.docs.first;
+      return docSnapshot.data()["coordinates"];
+    } catch (e) {
+      print(e);
+      return null;
     }
   }
 }

@@ -19,7 +19,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Image.asset("lib/assets/images/undraw_welcome_cats_thqn.png"),
             Lottie.asset(
               'lib/assets/animations/pet_lover.json',
               width: 200,
