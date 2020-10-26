@@ -7,6 +7,8 @@ class LoginScreenController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
   Rx<User> _firebaseUser = Rx<User>();
   User get user => _firebaseUser.value;
+  RxBool _isLoggingIn = false.obs;
+  RxBool get isLoggingIn => _isLoggingIn;
 
   @override
   void onInit() async {
@@ -23,6 +25,8 @@ class LoginScreenController extends GetxController {
   ///if there's an error then a snackbar shows the user the error
   void login(String email, String password) async {
     try {
+      _isLoggingIn.value = true;
+      _isLoggingIn.refresh();
       UserCredential _user = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       Get.find<UserController>().user =

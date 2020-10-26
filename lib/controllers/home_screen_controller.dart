@@ -12,7 +12,8 @@ class HomeScreenController extends GetxController {
   bool _serviceEnabled;
   PermissionStatus _permissionGranted;
   Location location = Location();
-  LocationData _locationData;
+  Rx<LocationData> _locationData =
+      LocationData.fromMap({'latitude': 0.0, 'longitude': 0.0}).obs;
   RxInt bottomNavIndex = 0.obs;
   BitmapDescriptor _customPin;
   Rx<Marker> _currentMarker = Marker(markerId: MarkerId("0")).obs;
@@ -23,13 +24,15 @@ class HomeScreenController extends GetxController {
   void onInit() async {
     super.onInit();
     setCustomMapPin();
+    _checkPermissions();
+    await getCurrentLocation();
     //todo: Uncomment after testing getLatestGeoPoint
-    if (await Device.thisDeviceIsDBGps()) {
-      Timer.periodic(const Duration(seconds: 1), (timer) {
-        setCurrentMapMarker();
-        Device.uploadLocationEveryTenSeconds();
-      });
-    }
+    // if (await Device.thisDeviceIsDBGps()) {
+    //   Timer.periodic(const Duration(seconds: 1), (timer) {
+    //     setCurrentMapMarker();
+    //     Device.uploadLocationEveryTenSeconds();
+    //   });
+    // }
   }
 
   ///Sets up a custom pin for Google Maps
@@ -65,17 +68,17 @@ class HomeScreenController extends GetxController {
   }
 
   ///Get the current device location
-  Future<LocationData> getLocation() async {
-    _checkPermissions();
-    _locationData = await location.getLocation();
-    return _locationData;
+  Future<LocationData> getCurrentLocation() async {
+    _locationData.value = await location.getLocation();
+    _locationData.refresh();
+    return _locationData.value;
   }
 
   ///Returns the current Latitude and Longitude using the the getLocation() method
   ///in a LatLng object usable by GoogleMaps
   Future<LatLng> getCurrentLatLng() async {
-    LocationData _location = await getLocation();
-    return LatLng(_location.latitude, _location.longitude);
+    await getCurrentLocation();
+    return LatLng(_locationData.value.latitude, _locationData.value.longitude);
   }
 
   ///Update the current map marker for this device.
@@ -101,6 +104,9 @@ class HomeScreenController extends GetxController {
   @override
   FutureOr onClose() {
     // TODO: implement onClose
+    _locationData.close();
+    _currentMarker.close();
+    _markers.close();
     return super.onClose();
   }
 }

@@ -18,32 +18,31 @@ class HomeScreen extends GetWidget<HomeScreenController> {
             FutureBuilder<LatLng>(
                 future: controller.getCurrentLatLng(),
                 builder: (context, snapshot) {
-                  print("Current Longitude and Latitude are: ${snapshot.data}");
-                  if (snapshot.connectionState == ConnectionState.active ||
-                      snapshot.data == null) {
+                  if (snapshot.connectionState == ConnectionState.active) {
+                    print(snapshot.data);
                     return Center(
                       child: CircularProgressIndicator(),
                     );
-                  }
-                  return Obx(
-                    () => GoogleMap(
-                      myLocationButtonEnabled: true,
-                      // myLocationEnabled: true,
-                      zoomControlsEnabled: false,
-                      markers: controller.markers.value,
-                      initialCameraPosition: CameraPosition(
-                        target: snapshot.data,
-                        zoom: 20,
+                  } else
+                    return Obx(
+                      () => GoogleMap(
+                        myLocationButtonEnabled: true,
+                        myLocationEnabled: true,
+                        zoomControlsEnabled: false,
+                        markers: controller.markers.value,
+                        initialCameraPosition: CameraPosition(
+                          target: snapshot.data,
+                          zoom: 20,
+                        ),
+                        onMapCreated: (GoogleMapController controller) {},
                       ),
-                      onMapCreated: (GoogleMapController controller) {},
-                    ),
-                  );
+                    );
                 }),
-
-            // FlatButton(
-            //   onPressed: () => Get.find<AuthController>().signOut(),
-            //   child: Text("Sign Out"),
-            // ),
+            FlatButton(
+              onPressed: () async =>
+                  print(await controller.getCurrentLocation()),
+              child: Text("Sign Out"),
+            ),
           ],
         ),
       ),

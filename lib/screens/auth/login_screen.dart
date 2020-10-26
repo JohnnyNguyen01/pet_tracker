@@ -58,33 +58,43 @@ class LoginScreen extends GetWidget<LoginScreenController> {
                             )),
                       ),
                       SizedBox(height: 15.0),
-                      ButtonTheme(
-                        minWidth: MediaQuery.of(context).size.width / 1.25,
-                        height: 45.0,
-                        child: RaisedButton(
-                          onPressed: () {
-                            controller.login(_emailController.text,
-                                _passwordController.text);
-                          }, //=>controller.login(_email, _password),
-                          color: Color(0xFFB6C6FF),
-                          hoverColor: Colors.white24,
-                          child: Text(
-                            "Login",
-                            style: Constants.poppinsWhiteText,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                        ),
-                      ),
-                      FlatButton(
-                          onPressed: () {
-                            Get.off(SignUpScreen());
-                          },
-                          child: Text(
-                            "Sign Up",
-                            style: Constants.loginButton,
-                          ))
+                      controller.isLoggingIn.value == false
+                          ? Column(
+                              children: [
+                                ButtonTheme(
+                                  minWidth:
+                                      MediaQuery.of(context).size.width / 1.25,
+                                  height: 45.0,
+                                  child: RaisedButton(
+                                    onPressed: () {
+                                      controller.login(_emailController.text,
+                                          _passwordController.text);
+                                    }, //=>controller.login(_email, _password),
+                                    color: Color(0xFFB6C6FF),
+                                    hoverColor: Colors.white24,
+                                    child: Text(
+                                      "Login",
+                                      style: Constants.poppinsWhiteText,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
+                                ),
+                                FlatButton(
+                                  onPressed: () {
+                                    Get.off(SignUpScreen());
+                                  },
+                                  child: Text(
+                                    "Sign Up",
+                                    style: Constants.loginButton,
+                                  ),
+                                )
+                              ],
+                            )
+                          : Center(
+                              child: CircularProgressIndicator(),
+                            )
                     ],
                   ),
                 ),
