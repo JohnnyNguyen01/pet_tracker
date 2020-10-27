@@ -25,14 +25,27 @@ class HomeScreenController extends GetxController {
     super.onInit();
     setCustomMapPin();
     _checkPermissions();
-    await getCurrentLocation();
-    //todo: Uncomment after testing getLatestGeoPoint
+    print("onInit has been run");
     // if (await Device.thisDeviceIsDBGps()) {
     //   Timer.periodic(const Duration(seconds: 1), (timer) {
     //     setCurrentMapMarker();
-    //     Device.uploadLocationEveryTenSeconds();
+    //     // Device.uploadLocationEveryTenSeconds();
     //   });
     // }
+    await getCurrentLocation();
+    //todo: Uncomment after testing getLatestGeoPoint
+  }
+
+  @override
+  void onReady() async {
+    // TODO: implement onReady
+    super.onReady();
+    if (await Device.thisDeviceIsDBGps()) {
+      Timer.periodic(const Duration(seconds: 1), (timer) {
+        setCurrentMapMarker();
+        // Device.uploadLocationEveryTenSeconds();
+      });
+    }
   }
 
   ///Sets up a custom pin for Google Maps
@@ -88,11 +101,11 @@ class HomeScreenController extends GetxController {
         markerId: MarkerId(thisDevice.deviceID),
         position: await getCurrentLatLng(),
         icon: _customPin);
-    print(await getCurrentLatLng());
     _currentMarker.refresh();
     _markers.value.clear();
     _markers.value.add(_currentMarker.value);
     _markers.refresh();
+    print(_markers.value.toString());
   }
 
   ///logs the user out

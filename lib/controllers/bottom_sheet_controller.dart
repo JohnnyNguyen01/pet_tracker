@@ -46,8 +46,6 @@ class BottomSheetController extends GetxController {
 
   void handleTestBtn() async {
     GPSDeviceModel thisDevice = await Device.getThisDeviceInfo();
-    GeoPoint result =
-        await Database.db.getLatestGeopointOfDevice(thisDevice.deviceID);
-    print(result.latitude);
+    print(thisDevice.deviceID);
   }
 }

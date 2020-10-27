@@ -48,7 +48,7 @@ class Device {
     bool result;
     GPSDeviceModel thisDevice = await getThisDeviceInfo();
     result = await Database.db.thisDeviceIsGPS(thisDevice.deviceID);
-    print(result);
+    print('thisDeviceIsDBGPS result is: $result');
     return result;
   }
 }

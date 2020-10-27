@@ -18,7 +18,8 @@ class HomeScreen extends GetWidget<HomeScreenController> {
             FutureBuilder<LatLng>(
                 future: controller.getCurrentLatLng(),
                 builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.active) {
+                  if (snapshot.connectionState == ConnectionState.active ||
+                      snapshot.data == null) {
                     print(snapshot.data);
                     return Center(
                       child: CircularProgressIndicator(),
