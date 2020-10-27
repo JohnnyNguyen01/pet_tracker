@@ -1,3 +1,4 @@
+import 'package:dog_tracker/screens/settings/profile_menu_screen.dart';
 import 'package:get/get.dart';
 
 class BottomNavBarController extends GetxController {
@@ -7,5 +8,18 @@ class BottomNavBarController extends GetxController {
     bottomNavIndex.value = index;
     bottomNavIndex.refresh();
     print(bottomNavIndex.value);
+    switch (bottomNavIndex.value) {
+      case 0:
+        {
+          Get.toNamed('/homescreen');
+        }
+        break;
+      case 2:
+        {
+          Get.to(ProfileMenuScreen());
+        }
+        break;
+      default:
+    }
   }
 }

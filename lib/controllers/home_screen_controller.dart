@@ -26,19 +26,12 @@ class HomeScreenController extends GetxController {
     setCustomMapPin();
     _checkPermissions();
     print("onInit has been run");
-    // if (await Device.thisDeviceIsDBGps()) {
-    //   Timer.periodic(const Duration(seconds: 1), (timer) {
-    //     setCurrentMapMarker();
-    //     // Device.uploadLocationEveryTenSeconds();
-    //   });
-    // }
     await getCurrentLocation();
-    //todo: Uncomment after testing getLatestGeoPoint
   }
 
   @override
   void onReady() async {
-    // TODO: implement onReady
+    // TODO: uncomment to upload location. Use Geopoints from firebase to update marker location
     super.onReady();
     if (await Device.thisDeviceIsDBGps()) {
       Timer.periodic(const Duration(seconds: 1), (timer) {
