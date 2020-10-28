@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dog_tracker/models/gps_device_model.dart';
 import 'package:dog_tracker/models/pet_model.dart';
-import '../models/user_model.dart';
+import '../../models/user_model.dart';
 
 class Database {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

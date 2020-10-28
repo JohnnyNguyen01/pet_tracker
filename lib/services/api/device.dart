@@ -4,7 +4,7 @@ import 'package:dog_tracker/models/gps_device_model.dart';
 import 'package:device_info/device_info.dart';
 import 'package:location/location.dart';
 
-import '../database.dart';
+import 'database.dart';
 
 class Device {
   static DeviceInfoPlugin _deviceInfo = DeviceInfoPlugin();

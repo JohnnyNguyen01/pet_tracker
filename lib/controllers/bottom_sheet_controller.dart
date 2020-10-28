@@ -1,11 +1,10 @@
 import 'dart:io';
 import 'dart:math';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info/device_info.dart';
 import 'package:dog_tracker/models/gps_device_model.dart';
 import 'package:dog_tracker/models/pet_model.dart';
 import 'package:dog_tracker/services/api/device.dart';
-import 'package:dog_tracker/services/database.dart';
+import 'package:dog_tracker/services/api/database.dart';
 import 'package:get/get.dart';
 
 class BottomSheetController extends GetxController {

@@ -1,7 +1,7 @@
 import 'package:dog_tracker/controllers/user_controller.dart';
 import 'package:dog_tracker/models/user_model.dart';
 import 'package:dog_tracker/screens/home/home_screen.dart';
-import 'package:dog_tracker/services/database.dart';
+import 'package:dog_tracker/services/api/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/state_manager.dart';
 import 'package:get/get.dart';

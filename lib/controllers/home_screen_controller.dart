@@ -19,6 +19,7 @@ class HomeScreenController extends GetxController {
   Rx<Marker> _currentMarker = Marker(markerId: MarkerId("0")).obs;
   Rx<Set<Marker>> _markers = HashSet<Marker>().obs;
   Rx<Set<Marker>> get markers => _markers;
+  Timer _timer;
 
   @override
   void onInit() async {
@@ -34,7 +35,7 @@ class HomeScreenController extends GetxController {
     // TODO: uncomment to upload location. Use Geopoints from firebase to update marker location
     super.onReady();
     if (await Device.thisDeviceIsDBGps()) {
-      Timer.periodic(const Duration(seconds: 1), (timer) {
+      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         setCurrentMapMarker();
         // Device.uploadLocationEveryTenSeconds();
       });
@@ -113,6 +114,7 @@ class HomeScreenController extends GetxController {
     _locationData.close();
     _currentMarker.close();
     _markers.close();
+    _timer.cancel();
     return super.onClose();
   }
 }
