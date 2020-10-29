@@ -88,7 +88,7 @@ class HomeScreenController extends GetxController {
     return LatLng(_locationData.value.latitude, _locationData.value.longitude);
   }
 
-  ///Update the current map marker for this device.
+  ///Update the current map marker for this device to it's current LatLng
   void setCurrentMapMarker() async {
     GPSDeviceModel thisDevice = await Device.getThisDeviceInfo();
     _currentMarker.value = Marker(
@@ -99,7 +99,6 @@ class HomeScreenController extends GetxController {
     _markers.value.clear();
     _markers.value.add(_currentMarker.value);
     _markers.refresh();
-    print(_markers.value.toString());
   }
 
   ///logs the user out
@@ -110,7 +109,6 @@ class HomeScreenController extends GetxController {
 
   @override
   FutureOr onClose() {
-    // TODO: implement onClose
     _locationData.close();
     _currentMarker.close();
     _markers.close();
