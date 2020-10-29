@@ -26,7 +26,7 @@ class HomeScreenController extends GetxController {
     super.onInit();
     setCustomMapPin();
     _checkPermissions();
-    print("onInit has been run");
+    await location.changeSettings(accuracy: LocationAccuracy.high);
     await getCurrentLocation();
   }
 
