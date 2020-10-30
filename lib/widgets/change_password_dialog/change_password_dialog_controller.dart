@@ -4,11 +4,13 @@ import 'dart:async';
 
 class ChangePasswordDialogController extends GetxController {
   RxString _currentPassword = "".obs;
+  RxString _currentPassFromFirebase = "".obs;
   RxString _newPassword = "".obs;
   RxString _confirmNewPassword = "".obs;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   RxString get currentPassword => _currentPassword;
+
   RxString get newPassword => _newPassword;
   RxString get confirmNewPassword => _confirmNewPassword;
   GlobalKey get formKey => _formKey;
@@ -34,7 +36,13 @@ class ChangePasswordDialogController extends GetxController {
     _confirmNewPassword.refresh();
   }
 
-  void handleConfirmBtn() {}
+  void handleConfirmBtn() {
+    if (!_formKey.currentState.validate()) {
+      return;
+    }
+    _formKey.currentState.save();
+  }
+
   void handleCancelButton() {}
 
   @override
