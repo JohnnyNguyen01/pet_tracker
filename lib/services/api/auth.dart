@@ -12,4 +12,13 @@ class Auth {
       rethrow;
     }
   }
+
+  ///Change the current signed in User's password
+  Future<void> changeCurrentUserPassword(String password) async {
+    try {
+      await _authInstnace.currentUser.updatePassword(password);
+    } catch (e) {
+      print(e);
+    }
+  }
 }

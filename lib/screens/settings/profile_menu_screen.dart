@@ -29,10 +29,12 @@ class ProfileMenuScreen extends GetWidget {
                 title: Text("Change Email"),
                 onTap: () {},
               ),
-              ListTile(
-                leading: Icon(Icons.lock_outlined),
-                title: Text("Change Password"),
-                onTap: () {},
+              Obx(
+                () => ListTile(
+                  leading: Icon(Icons.lock_outlined),
+                  title: Text("Change Password"),
+                  onTap: () => _controller.handleChangePasswordBtn(context),
+                ),
               ),
               Align(
                 alignment: Alignment.bottomCenter,
