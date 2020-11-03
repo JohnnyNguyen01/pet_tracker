@@ -10,40 +10,40 @@ class ProfileMenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigo,
       bottomNavigationBar: CommonBottomNavBar(),
-      body: SafeArea(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 140.0,
-                color: Colors.indigoAccent,
-                child: Center(),
-              ),
-              Heading(title: "Account Settings"),
-              ListTile(
-                leading: Icon(Icons.email_outlined),
-                title: Text("Change Email"),
-                onTap: () {},
-              ),
-              ListTile(
-                leading: Icon(Icons.lock_outlined),
-                title: Text("Change Password"),
-                onTap: () => _controller.handleChangePasswordBtn(context),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: FlatButton(
-                  onPressed: _controller.handleLogOutBtn,
-                  child: Text("Logout"),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 4,
+              color: Colors.indigoAccent,
+              child: Center(),
+            ),
+            Heading(title: "Account Settings"),
+            ListTile(
+              leading: Icon(Icons.email_outlined),
+              title: Text("Change Email"),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.lock_outlined),
+              title: Text("Change Password"),
+              onTap: () => _controller.handleChangePasswordBtn(context),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: FlatButton(
+                onPressed: _controller.handleLogOutBtn,
+                child: Text(
+                  "Logout",
+                  style: TextStyle(color: Colors.indigo),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
