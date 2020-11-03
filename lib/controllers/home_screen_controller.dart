@@ -18,6 +18,7 @@ class HomeScreenController extends GetxController {
   BitmapDescriptor _customPin;
   Rx<Marker> _currentMarker = Marker(markerId: MarkerId("0")).obs;
   Rx<Set<Marker>> _markers = HashSet<Marker>().obs;
+  
   Rx<Set<Marker>> get markers => _markers;
   Timer _timer;
 

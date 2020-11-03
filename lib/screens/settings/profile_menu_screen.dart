@@ -4,12 +4,13 @@ import 'package:dog_tracker/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileMenuScreen extends GetWidget {
+class ProfileMenuScreen extends StatelessWidget {
   //todo: check why binding doesn't work with GetWidget<ProfileMenuScreenController>
   final _controller = Get.put(ProfileMenuScreenController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.indigo,
       bottomNavigationBar: CommonBottomNavBar(),
       body: SafeArea(
         child: Container(
@@ -29,12 +30,10 @@ class ProfileMenuScreen extends GetWidget {
                 title: Text("Change Email"),
                 onTap: () {},
               ),
-              Obx(
-                () => ListTile(
-                  leading: Icon(Icons.lock_outlined),
-                  title: Text("Change Password"),
-                  onTap: () => _controller.handleChangePasswordBtn(context),
-                ),
+              ListTile(
+                leading: Icon(Icons.lock_outlined),
+                title: Text("Change Password"),
+                onTap: () => _controller.handleChangePasswordBtn(context),
               ),
               Align(
                 alignment: Alignment.bottomCenter,

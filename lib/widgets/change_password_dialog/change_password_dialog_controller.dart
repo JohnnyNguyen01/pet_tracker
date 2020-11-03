@@ -1,3 +1,4 @@
+import 'package:dog_tracker/services/api/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -41,9 +42,12 @@ class ChangePasswordDialogController extends GetxController {
       return;
     }
     _formKey.currentState.save();
+    // Auth.instance.updateCurrentUserPassword(_confirmNewPassword.value);
   }
 
-  void handleCancelButton() {}
+  void handleCancelButton(BuildContext context) {
+    Navigator.of(context).pop();
+  }
 
   @override
   FutureOr onClose() {

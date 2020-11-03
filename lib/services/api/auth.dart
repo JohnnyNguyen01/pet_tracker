@@ -22,6 +22,16 @@ class Auth {
     }
   }
 
+  ///Update the password of the currently signed in user.
+  // Future<void> updateCurrentUserPassword(String password) async {
+  //   try {
+  //     _authInstnace.currentUser.updatePassword(password);
+  //   } catch (e) {
+  //     _authInstnace.currentUser.reauthenticateWithCredential(credential);
+  //     AuthCredential
+  //   }
+  // }
+
   //TODO: finish this method to move on with Dialog Screen
   ///Retrieve the password of the currently signed in user
   Future<String> getCurrentUserPassword() async {}

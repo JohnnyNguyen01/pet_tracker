@@ -7,39 +7,38 @@ class ChangePasswordDialog extends GetWidget<ChangePasswordDialogController> {
   final _controller = Get.put(ChangePasswordDialogController());
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => AlertDialog(
-        title: Text("Change Password"),
-        content: SingleChildScrollView(
-          child: Form(
-            key: _controller.formKey,
-            child: ListBody(
-              children: [
-                _buildCurrentPass(),
-                _buildNewPass(),
-                _buildConfirmPass(),
-                SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    RaisedButton(
-                        child: Text(
-                          "Confirm",
-                          style: Constants.poppinsWhiteText,
-                        ),
-                        color: Colors.indigo,
-                        onPressed: () => _controller.handleConfirmBtn()),
-                    SizedBox(width: 5),
-                    FlatButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Cancel",
-                          style: TextStyle(color: Colors.indigo),
-                        ))
-                  ],
-                )
-              ],
-            ),
+    return AlertDialog(
+      title: Text("Change Password"),
+      content: SingleChildScrollView(
+        child: Form(
+          key: _controller.formKey,
+          child: ListBody(
+            children: [
+              _buildCurrentPass(),
+              _buildNewPass(),
+              _buildConfirmPass(),
+              SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  RaisedButton(
+                      child: Text(
+                        "Confirm",
+                        style: Constants.poppinsWhiteText,
+                      ),
+                      color: Colors.indigo,
+                      onPressed: () => _controller.handleConfirmBtn()),
+                  SizedBox(width: 5),
+                  FlatButton(
+                    onPressed: () => _controller.handleCancelButton(context),
+                    child: Text(
+                      "Cancel",
+                      style: TextStyle(color: Colors.indigo),
+                    ),
+                  )
+                ],
+              )
+            ],
           ),
         ),
       ),
@@ -47,21 +46,19 @@ class ChangePasswordDialog extends GetWidget<ChangePasswordDialogController> {
   }
 
   Widget _buildCurrentPass() {
-    return Obx(
-      () => TextFormField(
-        obscureText: true,
-        keyboardType: TextInputType.visiblePassword,
-        decoration: InputDecoration(
-          labelText: "Enter Current Password",
-        ),
-        validator: (String value) {
-          if (value.isEmpty || value == null) {
-            return "Please type in your current password";
-          }
-          return null;
-        },
-        onChanged: (value) => _controller.setCurrentPasswordTF(value),
+    return TextFormField(
+      obscureText: true,
+      keyboardType: TextInputType.visiblePassword,
+      decoration: InputDecoration(
+        labelText: "Enter Current Password",
       ),
+      validator: (String value) {
+        if (value.isEmpty || value == null) {
+          return "Please type in your current password";
+        }
+        return null;
+      },
+      onChanged: (value) => _controller.setCurrentPasswordTF(value),
     );
   }
 
