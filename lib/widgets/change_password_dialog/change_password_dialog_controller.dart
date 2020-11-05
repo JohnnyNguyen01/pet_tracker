@@ -1,11 +1,11 @@
-import 'package:dog_tracker/services/api/auth.dart';
+//import 'package:dog_tracker/services/api/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';
 
 class ChangePasswordDialogController extends GetxController {
   RxString _currentPassword = "".obs;
-  RxString _currentPassFromFirebase = "".obs;
+  //RxString _currentPassFromFirebase = "".obs;
   RxString _newPassword = "".obs;
   RxString _confirmNewPassword = "".obs;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();

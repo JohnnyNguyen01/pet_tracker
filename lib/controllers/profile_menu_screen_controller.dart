@@ -27,7 +27,6 @@ class ProfileMenuScreenController extends GetxController {
 
   @override
   FutureOr onClose() {
-    // TODO: implement onClose
     return super.onClose();
   }
 }
