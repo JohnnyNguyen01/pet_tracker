@@ -31,9 +31,10 @@ class LoginForm extends GetWidget<AuthController> {
             SizedBox(height: 15.0),
             TextFormField(
               controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 labelText: "Email",
-                hintText: "Johnny",
+                hintText: "example@emailexample.com",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),

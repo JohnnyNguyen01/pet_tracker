@@ -38,9 +38,10 @@ class LoginScreen extends GetWidget<LoginScreenController> {
                     children: [
                       TextFormField(
                         controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: "Email",
-                          hintText: "Johnny",
+                          hintText: "example@exampleemail.com",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
