@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dog_tracker/controllers/auth_controller.dart';
 import 'package:dog_tracker/models/gps_device_model.dart';
 import 'package:dog_tracker/services/api/device.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
 import 'package:location/location.dart';
+
+import '../services/api/database.dart';
 
 class HomeScreenController extends GetxController {
   bool _serviceEnabled;
@@ -18,7 +21,7 @@ class HomeScreenController extends GetxController {
   BitmapDescriptor _customPin;
   Rx<Marker> _currentMarker = Marker(markerId: MarkerId("0")).obs;
   Rx<Set<Marker>> _markers = HashSet<Marker>().obs;
-  
+
   Rx<Set<Marker>> get markers => _markers;
   Timer _timer;
 
@@ -50,6 +53,7 @@ class HomeScreenController extends GetxController {
         "lib/assets/images/corgi_pin_250x155.png");
   }
 
+  ///Responsible for changing the bottom navbar element on user tap
   void changeBottomNav(int index) {
     bottomNavIndex.value = index;
     bottomNavIndex.refresh();
@@ -92,9 +96,11 @@ class HomeScreenController extends GetxController {
   ///Update the current map marker for this device to it's current LatLng
   void setCurrentMapMarker() async {
     GPSDeviceModel thisDevice = await Device.getThisDeviceInfo();
+    GeoPoint geoPoint =
+        await Database.db.getLatestGeopointOfDevice(thisDevice.deviceID);
     _currentMarker.value = Marker(
         markerId: MarkerId(thisDevice.deviceID),
-        position: await getCurrentLatLng(),
+        position: LatLng(geoPoint.latitude, geoPoint.longitude),
         icon: _customPin);
     _currentMarker.refresh();
     _markers.value.clear();
