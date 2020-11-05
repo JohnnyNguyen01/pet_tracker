@@ -39,6 +39,30 @@ class HomeScreen extends GetWidget<HomeScreenController> {
                       ),
                     );
                 }),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                width: Get.width / 2.2,
+                height: 35.0,
+                margin: EdgeInsets.only(top: 15.0),
+                child: Card(
+                  elevation: 5.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text("Pet"),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.indigo,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
