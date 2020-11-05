@@ -59,6 +59,10 @@ class LoginForm extends GetWidget<AuthController> {
                 onPressed: () {
                   controller.handleSignUpButton(_nameController.text,
                       _passwordController.text, _emailController.text);
+                  FocusNode currentFocus = FocusScope.of(context);
+                  if (!currentFocus.hasPrimaryFocus) {
+                    currentFocus.unfocus();
+                  }
                 }, //=>controller.login(_email, _password),
                 color: Color(0xFFB6C6FF),
                 hoverColor: Colors.white24,

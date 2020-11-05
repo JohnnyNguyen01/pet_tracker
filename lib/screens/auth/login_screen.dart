@@ -70,7 +70,13 @@ class LoginScreen extends GetWidget<LoginScreenController> {
                                     onPressed: () {
                                       controller.login(_emailController.text,
                                           _passwordController.text);
-                                    }, //=>controller.login(_email, _password),
+                                      //dismiss the keybaord
+                                      FocusScopeNode currentFocus =
+                                          FocusScope.of(context);
+                                      if (!currentFocus.hasPrimaryFocus) {
+                                        currentFocus.unfocus();
+                                      }
+                                    },
                                     color: Color(0xFFB6C6FF),
                                     hoverColor: Colors.white24,
                                     child: Text(
