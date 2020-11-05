@@ -39,11 +39,6 @@ class HomeScreen extends GetWidget<HomeScreenController> {
                       ),
                     );
                 }),
-            FlatButton(
-              onPressed: () async =>
-                  print(await controller.getCurrentLocation()),
-              child: Text("Sign Out"),
-            ),
           ],
         ),
       ),
