@@ -40,7 +40,8 @@ class HomeScreenController extends GetxController {
     super.onReady();
     if (await Device.thisDeviceIsDBGps()) {
       _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-        setCurrentMapMarker();
+        // setCurrentMapMarker();
+        setAllGPSMapMarkers();
         // Device.uploadLocationEveryTenSeconds();
       });
     }
@@ -94,18 +95,41 @@ class HomeScreenController extends GetxController {
   }
 
   ///Update the current map marker for this device to it's current LatLng
-  void setCurrentMapMarker() async {
-    GPSDeviceModel thisDevice = await Device.getThisDeviceInfo();
-    GeoPoint geoPoint =
-        await Database.db.getLatestGeopointOfDevice(thisDevice.deviceID);
-    _currentMarker.value = Marker(
-        markerId: MarkerId(thisDevice.deviceID),
-        position: LatLng(geoPoint.latitude, geoPoint.longitude),
-        icon: _customPin);
-    _currentMarker.refresh();
-    _markers.value.clear();
-    _markers.value.add(_currentMarker.value);
-    _markers.refresh();
+  // void setCurrentMapMarker() async {
+  //   GPSDeviceModel thisDevice = await Device.getThisDeviceInfo();
+  //   GeoPoint geoPoint =
+  //       await Database.db.getLatestGeopointOfDevice(thisDevice.deviceID);
+  //   if (geoPoint != null) {
+  //     _currentMarker.value = Marker(
+  //         markerId: MarkerId(thisDevice.deviceID),
+  //         position: LatLng(geoPoint.latitude, geoPoint.longitude),
+  //         icon: _customPin);
+  //     _currentMarker.refresh();
+  //     _markers.value.clear();
+  //     _markers.value.add(_currentMarker.value);
+  //     _markers.refresh();
+  //   }
+  // }
+
+  void setAllGPSMapMarkers() async {
+    //grt all devices
+    List<GeoPoint> deviceGeoPoints =
+        await Database.db.getLatestGeoPointOfAllDevices();
+    // print("setAllGPSMarkers: ${deviceGeoPoints.length}");
+    //get their latest coordinates from firebase
+    //set map marker
+    // print(deviceGeoPoints);
+    if (deviceGeoPoints.isNotEmpty)
+      deviceGeoPoints.forEach((geoPoint) {
+        if (geoPoint != null) {
+          _markers.value.add(Marker(
+              markerId: MarkerId(geoPoint.toString()),
+              position: LatLng(geoPoint.latitude, geoPoint.longitude),
+              icon: _customPin));
+          _markers.refresh();
+        }
+      });
+    // print(_markers.value);
   }
 
   ///logs the user out

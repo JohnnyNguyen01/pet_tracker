@@ -84,6 +84,41 @@ class Database {
     return result;
   }
 
+  ///Returns a List of `GPSDeviceModel` containting all of the gps devices from
+  ///Firebase
+  Future<List<GPSDeviceModel>> getAllGPSDevicesOf() async {
+    List<GPSDeviceModel> deviceList = <GPSDeviceModel>[];
+    QuerySnapshot snapshot = await _firestore.collection('GPSDevices').get();
+    snapshot.docs.forEach((device) {
+      deviceList.add(GPSDeviceModel.fromJson(device.data()));
+    });
+    return deviceList;
+  }
+
+  ///Returns a List of the latest `GeoPoint` for each GPS device subscribed to
+  ///firebase that has at least one geopoint uploaded
+  Future<List<GeoPoint>> getLatestGeoPointOfAllDevices() async {
+    try {
+      List<GeoPoint> geoPointList = <GeoPoint>[];
+      List<GPSDeviceModel> devices = await getAllGPSDevicesOf();
+      // devices.forEach((device) async {
+      //   GeoPoint point = await getLatestGeopointOfDevice(device.deviceID);
+      //   geoPointList.add(point);
+      // });
+      await Future.forEach(devices, (device) async {
+        if (device != null) {
+          GeoPoint point = await getLatestGeopointOfDevice(device.deviceID);
+          geoPointList.add(point);
+        }
+      });
+      print(geoPointList);
+      return geoPointList;
+    } catch (e) {
+      // print("getLatestGeoPointOfAllDevices errro : $e");
+      return null;
+    }
+  }
+
   ///Upload this device's coordinates into firestore under the specific
   ///deviceID. Latitude and Longitude are stored as a `Geopoint` data
   ///type in firestore
@@ -99,7 +134,7 @@ class Database {
         'date-time': DateTime.now()
       });
     } catch (error) {
-      print(error);
+      print("uploadCurrentGPSLocation Error: $error");
     }
   }
 
