@@ -101,10 +101,6 @@ class Database {
     try {
       List<GeoPoint> geoPointList = <GeoPoint>[];
       List<GPSDeviceModel> devices = await getAllGPSDevicesOf();
-      // devices.forEach((device) async {
-      //   GeoPoint point = await getLatestGeopointOfDevice(device.deviceID);
-      //   geoPointList.add(point);
-      // });
       await Future.forEach(devices, (device) async {
         if (device != null) {
           GeoPoint point = await getLatestGeopointOfDevice(device.deviceID);
@@ -114,7 +110,6 @@ class Database {
       print(geoPointList);
       return geoPointList;
     } catch (e) {
-      // print("getLatestGeoPointOfAllDevices errro : $e");
       return null;
     }
   }
