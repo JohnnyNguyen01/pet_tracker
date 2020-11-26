@@ -42,5 +42,6 @@ Pet Tracker uses a number of open source projects to work properly:
     <tr>
         <td><img src="readme_files/screenshots/homeScreen.png" width=180px height=360px/></td>
         <td><img src="readme_files/screenshots/bottomsheet.png" width=180px height=360px/></td>
+        <td><img src="readme_files/screenshots/gpsScreen.png" width=180px height=360px/></td>
     </tr>
 </table>
