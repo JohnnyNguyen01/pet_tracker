@@ -5,10 +5,10 @@ import 'package:dog_tracker/controllers/auth_controller.dart';
 import 'package:dog_tracker/models/gps_device_model.dart';
 import 'package:dog_tracker/services/api/device.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
 import 'package:location/location.dart';
-
 import '../services/api/database.dart';
 
 class HomeScreenController extends GetxController {
@@ -21,6 +21,10 @@ class HomeScreenController extends GetxController {
   BitmapDescriptor _customPin;
   Rx<Marker> _currentMarker = Marker(markerId: MarkerId("0")).obs;
   Rx<Set<Marker>> _markers = HashSet<Marker>().obs;
+  //for polyline routes
+  RxSet<Polyline> polyLines = <Polyline>{}.obs;
+  RxList<LatLng> _polylineCoordinates = <LatLng>[].obs;
+  Rx<PolylinePoints> polylinePoints = PolylinePoints().obs;
 
   Rx<Set<Marker>> get markers => _markers;
   Timer _timer;
@@ -43,8 +47,45 @@ class HomeScreenController extends GetxController {
         // setCurrentMapMarker();
         setAllGPSMapMarkers();
         // Device.uploadLocationEveryTenSeconds();
+        setPolyLines();
       });
     }
+  }
+
+  //todo: refactor and redo [setPolyLines, createPolyLines]
+  void setPolyLines() async {
+    LatLng currentLatLng = await getCurrentLatLng();
+    PointLatLng currentPointLatLng =
+        PointLatLng(currentLatLng.latitude, currentLatLng.longitude);
+    List<GeoPoint> geoPoints =
+        await Database.db.getLatestGeoPointOfAllDevices();
+    await Future.forEach(geoPoints, (geoPoint) async {
+      if (geoPoint != null) {
+        PolylineResult result = await polylinePoints.value
+            .getRouteBetweenCoordinates(
+                'AIzaSyAr31utYalU_q4_Lh1GtqZrCDgg0VBlcHI',
+                currentPointLatLng,
+                PointLatLng(geoPoint.latitude, geoPoint.longitude));
+        if (result != null) {
+          result.points.forEach((PointLatLng point) {
+            _polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+            _polylineCoordinates.refresh();
+            createPolyLines();
+          });
+        }
+      }
+    });
+  }
+
+  ///Creates the actual polylines, must be used in setPolyLines method
+  ///todo: refactor and redo [setPolyLines, createPolyLines]
+  void createPolyLines() {
+    Polyline polyline = Polyline(
+        polylineId: PolylineId("poly"),
+        color: Color.fromARGB(255, 40, 122, 198),
+        points: _polylineCoordinates);
+    polyLines.add(polyline);
+    polyLines.refresh();
   }
 
   ///Sets up a custom pin for Google Maps
@@ -93,23 +134,6 @@ class HomeScreenController extends GetxController {
     await getCurrentLocation();
     return LatLng(_locationData.value.latitude, _locationData.value.longitude);
   }
-
-  ///Update the current map marker for this device to it's current LatLng
-  // void setCurrentMapMarker() async {
-  //   GPSDeviceModel thisDevice = await Device.getThisDeviceInfo();
-  //   GeoPoint geoPoint =
-  //       await Database.db.getLatestGeopointOfDevice(thisDevice.deviceID);
-  //   if (geoPoint != null) {
-  //     _currentMarker.value = Marker(
-  //         markerId: MarkerId(thisDevice.deviceID),
-  //         position: LatLng(geoPoint.latitude, geoPoint.longitude),
-  //         icon: _customPin);
-  //     _currentMarker.refresh();
-  //     _markers.value.clear();
-  //     _markers.value.add(_currentMarker.value);
-  //     _markers.refresh();
-  //   }
-  // }
 
   void setAllGPSMapMarkers() async {
     //grt all devices

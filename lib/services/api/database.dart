@@ -107,7 +107,6 @@ class Database {
           geoPointList.add(point);
         }
       });
-      print(geoPointList);
       return geoPointList;
     } catch (e) {
       return null;

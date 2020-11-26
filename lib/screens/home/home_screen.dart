@@ -31,11 +31,12 @@ class HomeScreen extends GetWidget<HomeScreenController> {
                         myLocationEnabled: true,
                         zoomControlsEnabled: false,
                         markers: controller.markers.value,
+                        polylines: controller.polyLines,
                         initialCameraPosition: CameraPosition(
                           target: snapshot.data,
                           zoom: 20,
                         ),
-                        onMapCreated: (GoogleMapController controller) {},
+                        onMapCreated: (GoogleMapController mapController) {},
                       ),
                     );
                 }),
