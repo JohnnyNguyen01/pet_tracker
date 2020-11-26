@@ -104,7 +104,7 @@ class Database {
       await Future.forEach(devices, (device) async {
         if (device != null) {
           GeoPoint point = await getLatestGeopointOfDevice(device.deviceID);
-          geoPointList.add(point);
+          if (point != null) geoPointList.add(point);
         }
       });
       return geoPointList;

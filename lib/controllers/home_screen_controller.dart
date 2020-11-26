@@ -43,13 +43,13 @@ class HomeScreenController extends GetxController {
     // TODO: uncomment to upload location. Use Geopoints from firebase to update marker location
     super.onReady();
     if (await Device.thisDeviceIsDBGps()) {
-      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _timer = Timer.periodic(const Duration(seconds: 15), (timer) {
         // setCurrentMapMarker();
         setAllGPSMapMarkers();
-        // Device.uploadLocationEveryTenSeconds();
-        setPolyLines();
+        Device.uploadLocationEveryTenSeconds();
       });
     }
+    setPolyLines();
   }
 
   //todo: refactor and redo [setPolyLines, createPolyLines]
@@ -62,28 +62,32 @@ class HomeScreenController extends GetxController {
     await Future.forEach(geoPoints, (geoPoint) async {
       if (geoPoint != null) {
         PolylineResult result = await polylinePoints.value
-            .getRouteBetweenCoordinates(
+            ?.getRouteBetweenCoordinates(
                 'AIzaSyAr31utYalU_q4_Lh1GtqZrCDgg0VBlcHI',
                 currentPointLatLng,
-                PointLatLng(geoPoint.latitude, geoPoint.longitude));
+                PointLatLng(geoPoint.latitude, geoPoint.longitude),
+                travelMode: TravelMode.walking,
+                optimizeWaypoints: true);
         if (result != null) {
           result.points.forEach((PointLatLng point) {
             _polylineCoordinates.add(LatLng(point.latitude, point.longitude));
             _polylineCoordinates.refresh();
-            createPolyLines();
+            // print(_polylineCoordinates.value);
           });
         }
       }
     });
+    createPolyLines();
   }
 
   ///Creates the actual polylines, must be used in setPolyLines method
   ///todo: refactor and redo [setPolyLines, createPolyLines]
   void createPolyLines() {
     Polyline polyline = Polyline(
+        width: 5,
         polylineId: PolylineId("poly"),
-        color: Color.fromARGB(255, 40, 122, 198),
-        points: _polylineCoordinates);
+        color: Color(0xFFB6C6FF),
+        points: _polylineCoordinates.value);
     polyLines.add(polyline);
     polyLines.refresh();
   }

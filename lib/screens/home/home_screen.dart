@@ -54,7 +54,9 @@ class HomeScreen extends GetWidget<HomeScreenController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text("Pet"),
+                      Container(
+                          margin: EdgeInsets.only(left: 10),
+                          child: Text("Pet")),
                       Icon(
                         Icons.arrow_drop_down,
                         color: Colors.indigo,
